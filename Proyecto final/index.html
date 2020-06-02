@@ -1,0 +1,469 @@
+<html>
+<head>
+<title>Sistema experto</title>
+<meta charset="utf8">
+<style>
+
+.popup
+{
+	background: rgba(0,0,0,0.6);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.popup-content
+{
+	height: 250px;
+	width: 500px;
+	background: white;
+	padding: 20px;
+	border-radius: 5px;
+	position: relative;
+	text-align: center;
+}
+
+.container
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+
+}
+
+.container h1
+{
+	color: black;
+	font-size: 35px;
+	margin-bottom: 40px;
+	position:absolute;
+
+}
+
+.button
+{
+	background: grey;
+	padding: 10px 15px;
+	color: black;
+	font-weight: bolder;
+	text-transform: uppercase;
+	font-size: 18px;
+	border-radius: 5px;
+	box-shadow: 6px 6px 29px -4px rgba(0,0,0,0.75);
+	margin-top: 25px;
+	text-decoration: none;
+	transition: 0.4s;
+}
+
+.button:hover
+{
+	background: #34495e;
+	color: #fff;
+}
+
+.close
+{
+	position: absolute;
+	top: -15px;
+	right: -15px;
+	background: #fff;
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	box-shadow: 6px 6px 29px -4px rgba(0,0,0,0.75);
+	cursor: pointer;
+}
+
+.des
+{
+	margin: 20px auto;
+	display: block;
+	width: 50%;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+
+
+#con
+{
+	margin: 30px;
+
+}
+#img {
+  display: block;
+  bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#cerrar
+{
+	position: absolute;
+	right: 5px;
+	top: 3px;
+}
+
+.ventana
+{
+	background: rgba(0,0,102,1);
+	width: 50%;
+	height: 70%;
+	color:rgba(255,255,255,1);
+	font-size: 20px;
+	position: absolute;
+	left: 24%;
+	top: 14%;
+	display: none;
+}
+
+.inicio
+{
+	border: none;
+  color: white;
+  padding: 70px 70px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 60px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: green;
+}
+
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.button2 {
+  background-color: white;
+  border: none;
+  border-color:white;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 5 	0%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 20%;
+  border-radius: 50%;
+}
+
+.confor {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- <div class="ventana" id="vent">
+		<div id="cerrar"><a href="javascript:cerrar()"><img src="imagenes/cerrar.png" width="20" height="20"></a>
+		</div>
+		<div id="con"><img id="img" src="imagenes/diarrea.jpg" width="200" height="200"></div>
+		<h1>Diagnostico</h1>
+		<p id="solucion">descripcion del tratamiento y a quien acudir</p>
+	</div>
+-->
+
+<div class="popup" id="vent">
+		<div class="popup-content">
+			<img src="imagenes/cerrar.png" class="close">
+			<img id="imgSol" width="120" height="120">
+			<p id="recomendacion">des solucion de la enfermedad</p>
+			<a href="#" class="button" onclick="recargar()">Aceptar</a>
+		</div>
+	</div>
+<div>
+<h1 id="titulo" align="center">Sistema experto</h1>
+</div>
+
+<div class="container">
+<div class="center" id="preguntas">
+</div>
+</div>
+<p id="demo"></p>
+
+<div class="for" id="datos">
+	<form action="#" method="post" align="center">
+  <div class="imgcontainer">
+    <img src="imagenes/user.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="confor">
+    
+    <input type="text" id="nombre" placeholder="Nombre" name="nombre" required>
+
+    
+    <input type="text" id="apellidos" placeholder="Apellidos" name="apellidos" required>
+
+    
+    <input type="text" id="peso" placeholder="Peso" name="peso" required>
+
+    
+    <input type="text" id="estatura" placeholder="Estatura" name="estatura" required>
+    <br>
+        
+    <button type="submit" id="iniciar" onclick="habilitar()">Iniciar</button>
+  </div>
+
+</form>
+</div>
+
+<!--
+<div class="container">
+<div class="center" id="preguntas">
+<button id="iniciar" class="inicio" onclick="habilitar()">Iniciar</button>
+</div>
+</div>
+<p id="demo"></p>
+-->
+<script>
+var suma=0;
+var respuestas=[];
+
+var Gripe=["tos","fiebre", "dolor de cabeza","cansancio"];
+var Rubeola=["fiebre","escalofrios","jaqueca","secrecion"];
+var Malaria=["diarrea","fiebre","ictericia","escalofrios"];
+var Hepatitis=["diarrea","nauseas","ictericia"];
+var Tuberculosis=["tos","cansancio","fiebre","escalofrios"];
+var Anemia=["cansancio","nauseas","apatia"];
+
+var sintomas=["diarrea","tos","cansancio","fiebre","dolor de cabeza","nauseas","ictericia","apatia","escalofrios","jaqueca","secrecion"];
+var MedGripe=["Jarabe","Contrex","Vacuna"];
+var MedRubeola=["Vacuna","Paracetamol"];
+var MedMalaria=["Vacuna"];
+var MedHepatitis=["Vacuna","Paracetamol"];
+var MedTuberculosis=["Paracetamol"];
+var MedAnemia=["Vitamina"];
+
+var EspGripe=["Otorrino","Endocrinólogo"];
+var EspRubeola=["Endocrinólogo","Medico Gral"];
+var EspGMalaria=["Endocrinólogo","Medico Gral"];
+var EspHepatitis=["Endocrinólogo","Medico Gral"];
+var EspTuberculosis=["Medico Gral"];
+var EspAnemia=["Nutriólogo"];
+
+//<button id="si" onclick="myFunction(id)">si</button>
+//<button id="no" onclick="myFunction(id)">no</button>
+
+function habilitar()
+{
+	document.getElementById("datos").innerHTML ="";
+	document.getElementById("preguntas").innerHTML = '<p>Diagnosticador de enfermedades</p><img id="imagen" src="imagenes/diarrea.jpg" width="500" height="330"><p id="pregunta"></p><button id="si" onclick="myFunction(id)">si</button><button id="no" onclick="myFunction(id)">no</button>';
+	document.getElementById("pregunta").innerHTML = "¿Usted padece "+sintomas[suma]+"?";
+	//var element = document.getElementById("iniciar");
+	//element.classList.toggle("button2");
+	//document.getElementById("iniciar").disabled = true;
+}
+
+function myFunction(iden)
+{
+	if (suma < 10)
+	{
+		if (iden == "si")
+		{
+			respuestas.push(sintomas[suma]);
+			//alert("si padesco "+sintomas[suma]);
+		}
+		else if(iden == "no")
+		{
+			//alert("no tengo ese sintoma");
+		}
+
+		//alert("tam res:"+respuestas.length);
+
+		suma=suma+1;
+		document.getElementById("pregunta").innerHTML = "¿Usted padece "+sintomas[suma]+"?";
+		document.getElementById("imagen").src = "imagenes/"+sintomas[suma]+".jpg";
+
+		if(respuestas.length >= 3)
+		{
+			//alert("ya hay 3 o mas sintomas");
+			//alert("respuestas: "+respuestas);
+			//alert("anemia: "+Anemia);
+			verificar(respuestas,Hepatitis,"Hepatitis");
+			verificar(respuestas,Anemia,"Anemia");
+			verificar(respuestas,Gripe,"Gripe");
+			verificar(respuestas,Malaria,"Malaria");
+			verificar(respuestas,Rubeola,"Rubeola");
+			verificar(respuestas,Tuberculosis,"Tuberculosis");
+
+		}
+		else
+		{
+
+		}
+
+	}
+	else
+	{
+		alert("termina programa, el conjunto de sintomas que usted tiene no se relaciona con el registro de enfermedades de nuestro sistema");
+
+		document.getElementById("si").disabled = true;
+		document.getElementById("no").disabled = true;
+		
+		document.getElementById("pregunta").style.color = "white";
+		document.getElementById("titulo").style.color = "white";
+	}
+}
+
+
+function comparar(res,enfermedad)
+{
+	var padecimientos=false;
+
+	//document.write("tam de res"+res.length);
+	//document.write("tam de em"+enfermedad.length);
+
+
+	if(res.length==enfermedad.length)
+	{
+		for (var i = 0; i < res.length; i++)
+		{
+			pos=enfermedad.indexOf(res[i]);
+			
+			if (pos == -1)
+			{
+				//document.write("<br>");
+				//document.write("no encontrada: "+res[i]);
+				padecimientos=false;
+				break;
+			}
+			else
+			{
+				//document.write("<br>");
+				//document.write("encontrada: "+res[i]);
+				padecimientos=true;
+				//document.write("<br>");
+			}
+		}
+	}
+	else
+	{
+		//document.write("no es del mismo tamaño");
+		padecimientos=false;
+	}
+
+	return padecimientos;
+}
+
+
+	function abrir(enfermedad,medicamentos,especialistas)
+	{
+		document.querySelector(".popup").style.display = "flex";
+		document.getElementById("preguntas").innerHTML ="";
+		//document.getElementById("imagen").src = "";
+		document.getElementById("imgSol").src = "imagenes/Anemia.jpg";
+		document.getElementById("recomendacion").innerHTML="Usted padece de "+enfermedad+", los medicamentos recomendados para tratar esta enfermedad son: "+medicamentos+". Acudir con alguno de los siguientes especialistas: "+especialistas;
+
+	}
+
+	function cerrar()
+	{
+		document.getElementById("vent").style.display="none";
+	}
+
+function recargar()
+{
+	location.reload();
+}
+function verificar(respuesta,enfermedad,nombreE,nombre)
+{
+	enfermo=comparar(respuesta,enfermedad);
+	//document.write("<br>");
+	//alert("diag "+enfermo);
+	if(enfermo==true)
+	{
+		if (nombreE=="Anemia")
+		{
+			abrir("Anemia",MedAnemia,EspAnemia,nombre);
+		}
+		else if(nombreE=="Hepatitis")
+		{
+			abrir("Hepatitis",MedHepatitis,EspHepatitis);	
+		}
+		else if(nombreE=="Gripe")
+		{
+			abrir("Gripe",MedGripe,EspGripe);		
+		}
+		else if(nombreE=="Malaria")
+		{
+			abrir("Malaria",MedMalaria,EspMalaria);		
+		}
+		else if(nombreE=="Rubeola")
+		{
+			abrir("Rubeola",MedRubeola,spRubeola);		
+		}
+		else if(nombreE=="Tuberculosis")
+		{
+			abrir("Tuberculosis",MedTuberculosis,EspTuberculosis);		
+		}
+	}
+	else
+	{
+		//alert("no esta enfermo");
+	}
+//document.write("enfermo de : "+enfermo);
+}
+
+
+
+
+</script>
+
+</body>
+
+<html>
